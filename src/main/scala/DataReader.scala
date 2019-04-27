@@ -12,7 +12,7 @@ class DataReader {
       StructField("dst", IntegerType, false)
     )))
       .load(path)
-      .limit(1500000)
+//      .limit(1500000)
   }
 
   def read_vertices(path: String, spark: SparkSession): DataFrame = {
