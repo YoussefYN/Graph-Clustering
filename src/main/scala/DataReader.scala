@@ -20,8 +20,7 @@ class DataReader {
       .option("header", "false")
       .option("sep", " ")
       .schema(StructType(Array(
-        StructField("id", IntegerType, false),
-        StructField("node_name", StringType, false)
+        StructField("id", IntegerType, false)
       )))
       .load(path)
   }
