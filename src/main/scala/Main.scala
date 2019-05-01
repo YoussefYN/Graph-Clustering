@@ -1,9 +1,7 @@
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkContext
-import org.apache.spark.graphx.{EdgeDirection, EdgeTriplet, VertexId}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.graphframes._
-import org.apache.spark.graphx._
 
 
 object Main {
@@ -21,13 +19,16 @@ object Main {
     sc.setLogLevel("OFF")
 
     val dataReader = new DataReader()
-    val edgesPath = args(0) // path to wiki-topcats.txt or simplified version
-    val verticesPath = args(1) // path to wiki-topcats-page-names.txt or simplified version
+    val edgesPath = args(0)
+    val verticesPath = args(1)
     val edges: DataFrame = dataReader.read_edges(edgesPath, spark)
     val vertices: DataFrame = dataReader.read_vertices(verticesPath, spark)
-    val graph = GraphFrame(vertices, edges)
-    graph.labelPropagation
-      .maxIter(100).run()
-      .write.csv("output")
+    val graph = GraphFrame(vertices, edges).toGraphX.mapVertices((vid, _) => vid.toLong)
+
+    val cluster = new GraphLabeling()
+    cluster
+      .run(graph, 100)
+      .map(_.toString.drop(1).dropRight(1))
+      .saveAsTextFile("outDir")
   }
 }
