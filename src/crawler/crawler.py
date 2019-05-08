@@ -16,7 +16,16 @@ graph_path = "graph.txt"
 MIN_PAGES = 100000
 TIME_DELAY = 0.05
 
-def get_links(page_url):
+def get_links(page_url, reg_exp):
+    """getting article links from page
+    
+    Arguments:
+        page_url {[string]} -- [relative path]
+        reg_exp {[re.compile]} -- [regular expression]
+    
+    Returns:
+        [iterable(string)] -- [iterable of url]
+    """
     page = BeautifulSoup(requests.get(url_wiki+page_url).content)
     body_content = page.find('div', {'id':'bodyContent'})
     result = reg_exp.findall(str(body_content))
@@ -31,9 +40,9 @@ if __name__ == "__main__":
 
     with tqdm(total=MIN_PAGES, desc='pages collected') as pbar:
         while len(queue) and graph_ind < MIN_PAGES:
-            time.sleep(TIME_DELAY)
-            current_page = queue.pop()
-            for new_page_url in get_links(current_page):
+            time.sleep(TIME_DELAY) # delay for not banning
+            current_page = queue.pop() 
+            for new_page_url in get_links(current_page, reg_exp):
                 if new_page_url not in pages:
                     queue.append(new_page_url)
                     pages[new_page_url] = graph_ind
