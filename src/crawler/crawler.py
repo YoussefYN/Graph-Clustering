@@ -7,14 +7,7 @@ import re
 from tqdm import tqdm as tqdm
 from collections import deque
 import time
-
-url_wiki = "https://en.wikipedia.org"
-reg_exp = re.compile('href\=\"(\/wiki\/[A-Za-z\_]+)\" title')
-initial_page_url = "/wiki/Reunification_Day"
-page_names = "page_names.txt"
-graph_path = "graph.txt"
-MIN_PAGES = 100000
-TIME_DELAY = 0.05
+import sys
 
 def get_links(page_url, reg_exp):
     """getting article links from page
@@ -32,6 +25,24 @@ def get_links(page_url, reg_exp):
     return result
 
 if __name__ == "__main__":
+    url_wiki = "https://en.wikipedia.org"
+    reg_exp = re.compile('href\=\"(\/wiki\/[A-Za-z\_]+)\" title')
+    initial_page_url = "/wiki/Reunification_Day"
+    page_names = "page_names.txt"
+    graph_path = "graph.txt"
+    MIN_PAGES = 100000
+    TIME_DELAY = 0.05
+
+    if len(sys.argv) > 1:
+        initial_page_url = sys.argv[1]
+    if len(sys.argv) > 3:
+        page_names = sys.argv[2]
+        graph_path = sys.argv[3]
+    if len(sys.argv) > 4:
+        MIN_PAGES = int(sys.argv[4])
+    if len(sys.argv) > 5:
+        TIME_DELAY = float(sys.argv[5])
+        
     graph_ind = 0
     pages = {initial_page_url:graph_ind}
     graph_ind+=1
