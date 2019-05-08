@@ -14,6 +14,7 @@ You can download this data from https://snap.stanford.edu/data/wiki-topcats.html
 
 To run shrinkage:
 >python3 src/data_separation.py \<arg1> \<arg2> \<arg3> \<arg4>
+
 where:
 *    arg1: path to adjacency list (wiki-topcats.txt)
 *    arg2: path to list of description for each node (wiki-topcats-page-names.txt)
@@ -34,3 +35,18 @@ The output directory will contains the output file, with this format at each lin
 
 
 Same instructions applied to run the code from IDE.
+
+# Crawler
+
+Web crawler which generate graph from wikipedia pages
+
+To run:
+>python3 src/crawler/crawler.py \<arg1> \<arg2> \<arg3> \<arg4> \<arg5>
+
+where:
+
+*   arg1: page in which crawler starts
+*   arg2: path to save adjacency list
+*   arg3: path to save list of description for each node (wiki url)
+*   arg4: amount of page to crawl
+*   arg5: time delay, to avoid ban
