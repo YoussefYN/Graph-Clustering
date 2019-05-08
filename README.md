@@ -1,6 +1,6 @@
 # Graph-Clustering 
 
-# Data for shrinkage
+# User Manual Data Shrinkage
 
 For data shrinkage you should have listed files
 
@@ -22,9 +22,9 @@ where:
 *    arg4: path for saving shrinked list of description for each node (\<nodes files>)
 
 # Data after filteration
-Can be found in the master branch in data/filtered-wikinodes5.txt and data/filtered-topcats5.txt
+Can be found in the master branch in data/filtered-wikinodes_f.txt and data/filtered-topcats_f.txt
 
-# User Manual
+# User Manual Graph-Clustering
 
 To run the Jar, use the following form:
 >spark-submit Graph-Clustering.jar \<edges files> \<nodes files> \<Out Directory>
@@ -36,7 +36,7 @@ The output directory will contains the output file, with this format at each lin
 
 Same instructions applied to run the code from IDE.
 
-# Crawler
+# User Manual Crawler
 
 Web crawler which generate graph from wikipedia pages
 
