@@ -4,9 +4,10 @@
 import random
 from collections import deque
 from tqdm import tqdm as tqdm
+import sys
 
 MIN_NODES = 150000
-MIN_EDGES = 1500000
+MIN_EDGES = 1500000 * 2
 
 def get_amounts(filtered_edges):
     """method returns the amoount of nodes and edges
@@ -26,14 +27,14 @@ def get_amounts(filtered_edges):
             nodes.add(dst)
     return (len(nodes), edges_amount)
 
-def read_graph():
+def read_graph(graph_path):
     """method read graph from adjacency list
     
     Returns:
         [dic(sets)] -- graph representation
     """
     edges = {}
-    with open("../data/wiki-topcats.txt") as f:
+    with open(graph_path) as f:
         print('reading the graph')
         for line in f:
             src, dst = list(map(int, line.split()))
@@ -131,12 +132,32 @@ def fill_edges(filtered_edges, edges, queue, visited_nodes, all_nodes):
                         
 
 if __name__ == "__main__":
-    """shirnkage of graph
+    """shrinkage the graph
+    input:  adjacency list of source graph
+    input: list of description for each node
+    output: shrinked adjacency list of source graph
+    output: shrinked list of description for each node
+    arg1: path to adjacency list 
+    arg2: path to list of description for each node
+    arg3: path for saving shrinked adjacency list
+    arg4: path for shrinked list of description for each node
     """
-    edges = read_graph()
+    if len(sys.argv) == 5:
+        graph_path = sys.argv[1]
+        page_names_path = sys.argv[2]
+        save_graph_path = sys.argv[3]
+        save_page_names_path = sys.argv[4]
+    else:
+        graph_path = "../data/wiki-topcats.txt"
+        page_names_path = '../data/wiki-topcats-page-names.txt'
+        save_graph_path = '../data/filtered-wiki-topcats_f.txt'
+        save_page_names_path = '../data/filtered-wiki-nodes_f.txt'
+
+    edges = read_graph(graph_path)
 
     edges_keys = list(edges.keys())
-    init_node = edges_keys[random.randint(0, len(edges_keys))]
+    # init_node = edges_keys[random.randint(0, len(edges_keys))]
+    init_node = edges_keys[7]
     filtered_edges = {}
     queue = deque([init_node])
     visited_nodes = set([init_node])
@@ -146,19 +167,20 @@ if __name__ == "__main__":
 
     print("nodes = {}, edges = {}".format(*get_amounts(filtered_edges)))
 
-    with open('../data/filtered-wiki-topcats_dfs.txt', 'w') as f:
+    with open(save_graph_path, 'w') as f:
         for src in sorted(filtered_edges.keys()):
             for dst in sorted(filtered_edges[src]):
-                print(src, dst, file = f)
+                print(src, dst, file = f) 
                 
-    with open('../data/wiki-topcats-page-names.txt', 'r') as f:
+    with open(page_names_path, 'r') as f:
         page_names = []
         for line in f:
             page_names.append(" ".join(line.split()[1:]))
 
-    with open('../data/filtered-wiki-nodes_dfs.txt', 'w') as f:
+    with open(save_page_names_path, 'w') as f:
         for node in sorted(list(all_nodes)):
             print(node, page_names[node], file=f)
 
 
 
+    
