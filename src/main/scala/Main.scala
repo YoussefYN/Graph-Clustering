@@ -29,6 +29,6 @@ object Main {
     cluster
       .run(graph, 100)
       .map(_.toString.drop(1).dropRight(1))
-      .saveAsTextFile("outDir")
+      .saveAsTextFile(args(2))
   }
 }
