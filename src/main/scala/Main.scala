@@ -9,8 +9,8 @@ object Main {
     Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
 
     var sparkMasterConf = "local"
-    if (args.length > 2) {
-      val threadCount = args(2).toInt
+    if (args.length > 3) {
+      val threadCount = args(3).toInt
       sparkMasterConf = s"local[$threadCount]"
     }
 
