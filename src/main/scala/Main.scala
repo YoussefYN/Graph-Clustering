@@ -7,16 +7,12 @@ import org.graphframes._
 object Main {
   def main(args: Array[String]): Unit = {
     Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
-<<<<<<< HEAD
+
     var sparkMasterConf = "local"
     if (args.length > 2) {
       val threadCount = args(2).toInt
       sparkMasterConf = s"local[$threadCount]"
     }
-
-=======
-    val sparkMasterConf = "local[8]"
->>>>>>> 82e1c7fa26d9769d0b4c2ce5d5c6ac8dab5151ac
 
     val spark = SparkSession
       .builder()
