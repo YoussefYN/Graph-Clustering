@@ -2,13 +2,13 @@
 
 ## User Manual: Data Shrinkage
 
-For data shrinkage you should have listed files
+For data shrinkage you should have listed files (uncompressed)
 
-1.  wiki-topcats.txt.gz	Hyperlink network of Wikipedia 
+1.  wiki-topcats.txt	Hyperlink network of Wikipedia 
 
-1.  wiki-topcats-categories.txt.gz	Which articles are in which of the top categories
+1.  wiki-topcats-categories.txt	Which articles are in which of the top categories
 
-1.  wiki-topcats-page-names.txt.gz	Names of the articles
+1.  wiki-topcats-page-names.txt	Names of the articles
 
 You can download this data from https://snap.stanford.edu/data/wiki-topcats.html or from https://yadi.sk/d/1Uu4-MhFX-niqQ (faster way)
 
