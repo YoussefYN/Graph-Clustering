@@ -27,7 +27,7 @@ Can be found in the master branch in data/filtered-wikinodes_f.txt and data/filt
 ## User Manual: Graph-Clustering
 
 To run the Jar, use the following form:
->spark-submit Graph-Clustering.jar \<edges files> \<nodes files> \<Out Directory>
+>spark-submit Graph-Clustering.jar \<edges files> \<nodes files> \<Out Directory> \[thread count]
 
 
 The output directory will contains the output file, with this format at each line 
