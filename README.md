@@ -56,3 +56,7 @@ where:
 
 ### Data after crawling
 Can be found in src/crawler/graph.txt and src/crawler/page_names.txt
+
+
+### Analysis
+The analysis that was conducted on the clusters can be found in Analysis directory.
