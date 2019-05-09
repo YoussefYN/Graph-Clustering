@@ -7,7 +7,7 @@ import org.graphframes._
 object Main {
   def main(args: Array[String]): Unit = {
     Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
-    val sparkMasterConf = "local"
+    val sparkMasterConf = "local[8]"
 
     val spark = SparkSession
       .builder()
@@ -27,7 +27,7 @@ object Main {
 
     val cluster = new GraphLabeling()
     cluster
-      .run(graph, 100)
+      .run(graph, 10)
       .map(_.toString.drop(1).dropRight(1))
       .saveAsTextFile(args(2))
   }
